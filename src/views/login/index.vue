@@ -8,43 +8,33 @@
     >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
-        <span class="icon">00</span>
+        <svg-icon className="svg-language" icon="language"></svg-icon>
       </div>
-      <!-- 用户名 -->
       <el-form-item prop="username">
         <span class="svg-container">
           <el-icon>
-            <avatar />
+            <svg-icon icon="user"></svg-icon>
           </el-icon>
         </span>
-        <el-input v-model="loginForm.username" />
+        <el-input v-model.trim="loginForm.username" />
       </el-form-item>
-      <!-- 密码 -->
       <el-form-item prop="password">
-        <el-input :type="inputType" v-model="loginForm.password">
-          <template #prefix>
-            <el-icon class="el-input__icon"><search /></el-icon>
-          </template>
-          <template #suffix>
-            <el-icon
-              v-if="inputType === 'password'"
-              @click="handllePassWordStatus"
-              class="el-input__icon1"
-              ><Hide
-            /></el-icon>
-            <el-icon
-              v-else
-              @click="handllePassWordStatus"
-              class="el-input__icon1"
-              ><View
-            /></el-icon>
-          </template>
-        </el-input>
+        <span class="svg-container">
+          <el-icon>
+            <svg-icon icon="password"></svg-icon>
+          </el-icon>
+        </span>
+        <el-input
+          :type="inputType"
+          v-model.trim="loginForm.password"
+        ></el-input>
+        <span class="svg-pwd" @click="handllePassWordStatus">
+          <el-icon>
+            <svg-icon :icon="passwordIconStatus"></svg-icon>
+          </el-icon>
+        </span>
       </el-form-item>
-      <el-button
-        class="login-button"
-        type="primary"
-        @click="handleLoginSubmit(LoginForm)"
+      <el-button class="login-button" type="primary" @click="handleLoginSubmit"
         >登录</el-button
       >
     </el-form>
@@ -52,15 +42,17 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+// import UserApi from '../../api/user'
+import { reactive, ref, computed } from 'vue'
 import { validatePassword } from './rule'
-import { Avatar, Search, View, Hide } from '@element-plus/icons-vue'
+// import md5 from 'md5'
 
 const inputType = ref('password')
+const LoginForm = ref()
 
 const loginForm = reactive({
-  username: '',
-  password: ''
+  username: 'super-admin',
+  password: '123456'
 })
 
 const loginRules = reactive({
@@ -80,15 +72,28 @@ const loginRules = reactive({
   ]
 })
 
-const handleLoginSubmit = async (formName) => {
-  if (!formName) return
-  await formName.validate((valid) => {
-    if (valid) {
-      alert('登录')
-    }
+const passwordIconStatus = computed(() => {
+  return inputType.value === 'password' ? 'eye' : 'eye-open'
+})
+
+/**
+ * 登录方式
+ */
+const handleLoginSubmit = async () => {
+  if (!LoginForm.value) return
+  await LoginForm.value.validate(async (valid) => {
+    // if (valid) {
+    //   alert('登录')
+    //   loginForm.password = md5(loginForm.password)
+    //   const response = await UserApi.login(loginForm)
+    //   console.log(response)
+    // }
   })
 }
 
+/**
+ * 密码框状态切换方法
+ */
 const handllePassWordStatus = () => {
   inputType.value = inputType.value === 'password' ? 'text' : 'password'
 }
@@ -126,12 +131,22 @@ $cursor: #fff;
         vertical-align: middle;
         display: inline-block;
       }
+
+      .svg-pwd {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        font-size: 16px;
+        color: $dark_gray;
+        cursor: pointer;
+        user-select: none;
+      }
     }
 
     ::v-deep .el-input {
       display: inline-block;
       height: 47px;
-      width: 90%;
+      width: 85%;
       .el-input__wrapper {
         background: transparent !important;
         box-shadow: none;
@@ -160,12 +175,15 @@ $cursor: #fff;
         font-weight: bold;
         margin-bottom: 40px;
       }
-      .icon {
+      ::v-deep .svg-language {
         position: absolute;
-        top: 0;
+        top: 4px;
         right: 0;
-        color: $light_gray;
+        background-color: #fff;
         font-size: 22px;
+        padding: 4px;
+        border-radius: 4px;
+        cursor: pointer;
       }
     }
 
@@ -173,10 +191,6 @@ $cursor: #fff;
       width: 100%;
       margin-bottom: 30px;
     }
-  }
-  .el-input__icon1 {
-    position: absolute;
-    right: 0;
   }
 }
 </style>

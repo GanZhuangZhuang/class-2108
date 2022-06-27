@@ -8,6 +8,9 @@ import './styles/index.scss'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
+import installIcons from './icons/index.js'
+
 const app = createApp(App)
+installIcons(app)
 
 app.use(ElementPlus).use(store).use(router).mount('#app')
