@@ -10,7 +10,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
 import installIcons from './icons/index.js'
-
+import './permission'
 const app = createApp(App)
 installIcons(app)
 

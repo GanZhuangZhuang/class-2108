@@ -1,7 +1,9 @@
 import { createStore } from 'vuex'
-import User from './module/user'
+import user from './module/user'
+import getters from './getters'
 export default createStore({
+  getters,
   modules: {
-    User
+    user
   }
 })
