@@ -1,11 +1,5 @@
 /**
  *
- * // v1 https://www.baidu.com
- *
- * // v2 https://www.jd.com
- *
- * // v3 https://www.taobao.com
- *
  *
  * 引入axios
  *
@@ -31,6 +25,9 @@ import axios from 'axios'
 import md5 from 'md5'
 
 import loading from './loading'
+
+import { ElMessage } from 'element-plus'
+import { Promise } from 'core-js'
 
 // 创建axios实例对象
 const service = axios.create({
@@ -66,15 +63,20 @@ service.interceptors.response.use(
     // 关闭loading加载
     loading.close()
 
-    // TODO token过期状态
-
+    const { success, message, data } = response.data
     // TODO 全局响应处理
-
-    return response
+    if (success) {
+      return data
+    } else {
+      ElMessage.error(message)
+      return Promise.reject(new Error(message))
+    }
+    // TODO token过期状态
   },
   (error) => {
     // 关闭loading加载
     loading.close()
+    ElMessage.error(error.message) // 提示错误信息
     return Promise.reject(error)
   }
 )

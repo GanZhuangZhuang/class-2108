@@ -9,8 +9,8 @@ const publicRoutes = [
     component: () => import('@/views/login/index')
   },
   {
-    path: '/user',
-    component: () => import('@/views/user/user')
+    path: '/',
+    component: () => import('../layout')
   }
 ]
 

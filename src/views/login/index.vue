@@ -51,7 +51,9 @@ import { useRouter } from 'vue-router'
 import md5 from 'md5'
 
 const store = useStore()
-const $router = useRouter()
+// 跳转
+const router = useRouter()
+
 const inputType = ref('password')
 const LoginForm = ref()
 
@@ -89,10 +91,13 @@ const handleLoginSubmit = async () => {
   await LoginForm.value.validate(async (valid) => {
     if (valid) {
       const newLoginForm = util.deepCopy(loginForm)
+      // md5加密
       newLoginForm.password = md5(newLoginForm.password)
 
-      store.dispatch('login', newLoginForm)
-      $router.push({ path: 'user/user' })
+      const response = await store.dispatch('login', newLoginForm)
+      if (response.token) router.push('/')
+      // 跳转
+      // $router.push({ path: 'user/user' })
     }
   })
 }
