@@ -3,95 +3,36 @@
     active-text-color="#fff"
     background-color="#304156"
     default-active=""
-    text-color="#fff"
+    text-color="#bfcbd9"
     unique-opened
     router
   >
-    <template v-for="(item, index) in menuList" :key="index">
-      <template v-if="item && !item.children">
-        <el-menu-item :index="item.path">
-          <el-icon>
-            <svg-icon :icon="item.meta.icon"></svg-icon>
-          </el-icon>
-          {{ item.meta.title }}
-        </el-menu-item>
-      </template>
-      <template v-if="item && item.children && item.children.length > 0">
-        <el-sub-menu :index="index">
-          <template #title>
-            <el-icon>
-              <svg-icon :icon="item.meta.icon"></svg-icon>
-            </el-icon>
-            <span>{{ item.meta.title }}</span>
-          </template>
-        </el-sub-menu>
-      </template>
-    </template>
-
-    <!-- <el-sub-menu index="/profile">
-      <template #title>
-        <el-icon>
-          <svg-icon icon="personnel"></svg-icon>
-        </el-icon>
-        <span>个人中心</span>
-      </template>
-    </el-sub-menu>
-    <el-sub-menu index="1">
-      <template #title>
-        <el-icon>
-          <svg-icon icon="personnel"></svg-icon>
-        </el-icon>
-        <span>用户</span>
-      </template>
-
-      <el-menu-item index="/user/manage">
-        <el-icon>
-          <svg-icon icon="personnel-manage"></svg-icon>
-        </el-icon>
-        <sspan>员工管理</sspan>
-      </el-menu-item>
-
-      <el-menu-item index="/user/role">
-        <el-icon>
-          <svg-icon icon="role"></svg-icon>
-        </el-icon>
-        <span>角色列表</span>
-      </el-menu-item>
-
-      <el-menu-item index="/user/permission">
-        <el-icon>
-          <svg-icon icon="permission"></svg-icon>
-        </el-icon>
-        <span>权限管理</span>
-      </el-menu-item>
-    </el-sub-menu>
-    <el-sub-menu index="2">
-      <template #title>
-        <el-icon>
-          <svg-icon icon="article"></svg-icon>
-        </el-icon>
-        <span>文章</span>
-      </template>
-
-      <el-menu-item index="/article/ranking">
-        <el-icon>
-          <svg-icon icon="article-ranking"></svg-icon>
-        </el-icon>
-        <sspan>文章排名</sspan>
-      </el-menu-item>
-
-      <el-menu-item index="/article/create">
-        <el-icon>
-          <svg-icon icon="article-create"></svg-icon>
-        </el-icon>
-        <span>文章创建</span>
-      </el-menu-item>
-    </el-sub-menu> -->
+    <sidebar-menu-item
+      v-for="item in menuList"
+      :key="item"
+      :menuList="item"
+    ></sidebar-menu-item>
   </el-menu>
 </template>
-
+<!-- /**
+ * 1. 先定义菜单最终所需要的数据
+ *
+ * 2. 通过递归组件动态渲染菜单的数据
+ *
+ * 3. 获取到路由表的所有数据 router.getRoutes() 完整路由表的数据
+ *
+ * 4. 将路由表的数据过滤成菜单最终所需要的数据
+ *
+ * 没有children   el-menu-item
+ * 有children     el-sub-menu
+ */ -->
 <script setup>
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { filterMenuData } from '../../utils/menu'
+import SidebarMenuItem from './SidebarMenuItem'
+
+const router = useRouter()
 const data = [
   {
     path: '/profile',
@@ -99,7 +40,8 @@ const data = [
     meta: {
       title: '个人中心',
       icon: 'personnel'
-    }
+    },
+    children: []
   },
   {
     path: '/user',
@@ -166,7 +108,10 @@ const data = [
     ]
   }
 ]
-const menuList = reactive(data)
+
+console.log('routes=>', router.getRoutes())
+
+const menuList = reactive(filterMenuData(data))
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped lang="scss"></style>
