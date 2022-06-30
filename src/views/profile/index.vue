@@ -2,6 +2,8 @@
   <div class="">个人中心</div>
 </template>
 
-<script setup></script>
+<script setup>
+</script>
 
-<style lang="scss" scoped></style>
+<style scoped lang='scss'>
+</style>

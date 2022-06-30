@@ -1,6 +1,7 @@
 <template>
-  <div class="">用户</div>
+  <div >员工管理</div>
 </template>
 
-<script setup></script>
-<style lang="scss" scoped></style>
+<script setup>
+</script>
+<style scoped lang='scss'></style>

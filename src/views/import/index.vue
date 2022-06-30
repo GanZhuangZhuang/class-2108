@@ -1,6 +1,8 @@
 <template>
-  <div class="">Excel导入</div>
+  <div >Excel导入</div>
 </template>
 
-<script setup></script>
-<style lang="scss" scoped></style>
+<script setup>
+</script>
+<style scoped lang='scss'>
+</style>
