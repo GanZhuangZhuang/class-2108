@@ -10,6 +10,6 @@
 .app-main {
   height: calc(100vh - 85px);
   padding: 105px 20px 20px 20px;
-  background: pink;
+  // background: pink;
 }
 </style>
