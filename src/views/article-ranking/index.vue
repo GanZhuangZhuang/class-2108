@@ -1,8 +1,7 @@
 <template>
-  <div >文章排名</div>
+  <div class="">文章排名</div>
 </template>
 
-<script setup>
-</script>
-<style scoped lang='scss'>
-</style>
+<script setup></script>
+
+<style lang="scss"></style>

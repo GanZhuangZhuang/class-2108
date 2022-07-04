@@ -1,10 +1,12 @@
 <template>
-  <div >数据可视化</div>
+    <div class=''>数据可视化</div>
 </template>
 
-<script setup>
+<script>
+
 
 </script>
 
 <style scoped lang='scss'>
+
 </style>

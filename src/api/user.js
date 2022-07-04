@@ -13,7 +13,7 @@ const login = (data) => {
  * 获取用户信息接口
  * @returns
  */
-const getUserInfo = () => {
+ const getUserInfo = () => {
   return request({ url: '/sys/profile', method: 'GET' })
 }
 

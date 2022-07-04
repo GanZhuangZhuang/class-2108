@@ -15,7 +15,7 @@
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import AppMain from './AppMain'
-import TagsView from '../components/TagsView'
+import TagsView  from '../components/TagsView.vue'
 </script>
 
 <style lang="scss" scoped>

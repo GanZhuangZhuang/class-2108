@@ -1,9 +1,12 @@
 <template>
-  <div class="">个人中心</div>
+    <div class=''>个人中心 </div>
 </template>
 
-<script setup>
+<script>
+
+
 </script>
 
 <style scoped lang='scss'>
+
 </style>

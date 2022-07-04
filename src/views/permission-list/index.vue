@@ -1,8 +1,12 @@
 <template>
-  <div >权限列表</div>
+    <div class=''>权限列表</div>
 </template>
 
-<script setup>
+<script>
+
+
 </script>
-<style scoped lang='scss'>
+
+<style scoped  lang='scss'>
+
 </style>

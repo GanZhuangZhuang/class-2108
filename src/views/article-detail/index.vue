@@ -1,8 +1,12 @@
 <template>
-  <div >文章详情</div>
+    <div class=''>文章详情</div>
 </template>
 
-<script setup>
+<script>
+
+
 </script>
-<style scoped lang='scss'>
+
+<style lang='scss'>
+
 </style>
